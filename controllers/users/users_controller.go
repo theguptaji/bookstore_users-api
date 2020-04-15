@@ -12,6 +12,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func getUserId(userIdParam string) (int64, *errors.RestErr) {
+	userId, err := strconv.ParseInt(userIdParam, 10, 64)
+	if err != nil {
+		return 0, errors.NewBadRequestError("user id should be a number")
+	}
+	return userId, nil
+}
+
 // CreateUser creates the user
 func CreateUser(c *gin.Context) {
 	var user users.User
@@ -25,15 +33,14 @@ func CreateUser(c *gin.Context) {
 		c.JSON(saveErr.Status, saveErr)
 		return
 	}
-	c.JSON(http.StatusCreated, result)
+	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
 // GetUser gets the user with given id
 func GetUser(c *gin.Context) {
-	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
-	if userErr != nil {
-		err := errors.NewBadRequestError("user id should be a number")
-		c.JSON(err.Status, err)
+	userId, idErr := getUserId(c.Param("user_id"))
+	if idErr != nil {
+		c.JSON(idErr.Status, idErr)
 		return
 	}
 
@@ -42,14 +49,13 @@ func GetUser(c *gin.Context) {
 		c.JSON(getErr.Status, getErr)
 		return
 	}
-	c.JSON(http.StatusOK, user)
+	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
 func UpdateUser(c *gin.Context) {
-	userId, userErr := strconv.ParseInt(c.Param("user_id"), 10, 64)
-	if userErr != nil {
-		err := errors.NewBadRequestError("user id should be a number")
-		c.JSON(err.Status, err)
+	userId, idErr := getUserId(c.Param("user_id"))
+	if idErr != nil {
+		c.JSON(idErr.Status, idErr)
 		return
 	}
 
@@ -68,5 +74,29 @@ func UpdateUser(c *gin.Context) {
 		c.JSON(updateErr.Status, updateErr)
 		return
 	}
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-Public") == "true"))
+}
+
+func DeleteUser(c *gin.Context) {
+	userId, idErr := getUserId(c.Param("user_id"))
+	if idErr != nil {
+		c.JSON(idErr.Status, idErr)
+		return
+	}
+
+	if deleteErr := services.DeleteUser(userId); deleteErr != nil {
+		c.JSON(deleteErr.Status, deleteErr)
+		return
+	}
+	c.JSON(http.StatusOK, map[string]string{"status": "deleted"})
+
+}
+
+func Search(c *gin.Context) {
+	status := c.Query("status")
+	users, err := services.Search(status)
+	if err != nil {
+		c.JSON(err.Status, err)
+	}
+	c.JSON(http.StatusOK, users.Marshall(c.GetHeader("X-Public") == "true"))
 }
