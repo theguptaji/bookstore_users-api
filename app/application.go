@@ -11,5 +11,5 @@ var (
 // StartApplication function is the starting point of whole application
 func StartApplication() {
 	mapUrls()
-	router.Run(":8080")
+	router.Run(":8081")
 }
