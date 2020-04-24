@@ -52,8 +52,8 @@ github.com/stretchr/testify v1.5.1 h1:nOGnQDM7FYENwehXlg/kFVnos3rEvtKTjRvOWSzb6H
 github.com/stretchr/testify v1.5.1/go.mod h1:5W2xD1RspED5o8YsWQXVCued0rvSQ+mT+I5cxcmMvtA=
 github.com/theguptaji/bookstore_oauth-go v0.0.0-20200419195739-330026b8e114 h1:C7RqaiTmV2FWttLQmPFB1hHOyO5pDnyIYs+diB9T2i4=
 github.com/theguptaji/bookstore_oauth-go v0.0.0-20200419195739-330026b8e114/go.mod h1:OVeVmqoZpYnTBaJM9R3AK7KGO1ThbrSkszzmT0tpy6M=
-github.com/theguptaji/bookstore_utils-go v0.0.0-20200421162340-51b23eaf7b95 h1:RNccRlts8+FtA8MouzNVCw54o+ccFXBnsw9ZGNAGSc4=
-github.com/theguptaji/bookstore_utils-go v0.0.0-20200421162340-51b23eaf7b95/go.mod h1:L4GLCL5D7Ttp7fp3Plh76YdabK7dbcLtrNmvIHW1B/M=
+github.com/theguptaji/bookstore_utils-go v0.0.0-20200424134940-7f4f8498f60d h1:0pKiUPqCzsOxIAosYiMtoq//KBeR5OcmYfLrUIrm25o=
+github.com/theguptaji/bookstore_utils-go v0.0.0-20200424134940-7f4f8498f60d/go.mod h1:bQwptClZvBLp4UoUk8Y+8PK2+2GPxXcMNqczzJURins=
 github.com/ugorji/go v1.1.7 h1:/68gy2h+1mWMrwZFeD1kQialdSzAb432dtpeJ42ovdo=
 github.com/ugorji/go v1.1.7/go.mod h1:kZn38zHttfInRq0xu/PH0az30d+z6vm202qpg1oXVMw=
 github.com/ugorji/go/codec v1.1.7 h1:2SvQaVZ1ouYrrKKwoSk2pzd4A9evlKJb9oTL+OaLUSs=
